@@ -29,6 +29,10 @@ class DDPM(BaseMethod):
         self. beta_end = beta_end
         # TODO: Implement your own init
 
+        self.beta = torch.linspace(beta_start, beta_end, num_timesteps, device=device)
+        self.alpha = 1.0 - self.beta
+        self.alpha_bar = torch.cumprod(self.alpha, dim=0)
+
     # =========================================================================
     # You can add, delete or modify as many functions as you would like
     # =========================================================================
